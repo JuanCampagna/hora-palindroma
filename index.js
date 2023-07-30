@@ -1,28 +1,31 @@
-const esHoraPalindroma = (hora) => {
-  let horaString = hora.toString()
-  horaString = horaString.replace(':','')
+const esHoraPalindroma = () => {
+  hora = document.getElementById("inputHora").value;
+  hora = hora.replace(':','')
 
   document.getElementById("respuesta").innerHTML = ""
   document.getElementById("palindromoCuatroDigitos").innerHTML = ""
   document.getElementById("palindromoTresDigitos").innerHTML = ""
 
-  if (esPalindromo24Horas(horaString) || esPalindromo12Horas(horaString)) {
+  if (isNaN(hora) || hora=="") { 
+    document.getElementById("respuesta").innerHTML = "El valor ingresado no es numérico"
+    return
+  }
+
+  const palindromo24horas = esPalindromo24Horas(hora)
+  const palindromo12Horas = esPalindromo12Horas(hora)
+  if (palindromo24horas || palindromo12Horas) {
+    if (palindromo24horas && palindromo12Horas) {
+      // Insertar gif de festejo con un texto
+    }
     document.getElementById("respuesta").innerHTML = "Es palíndromo"
   } else {
     document.getElementById("respuesta").innerHTML = "No es palíndromo"
   }
 }
 
-const imprime = () => {
-  const hora = document.getElementById("inputHora").value
-  // console.log(esHoraPalindroma(hora))
-  esHoraPalindroma(hora)
-  // document.getElementById("respuesta").innerHTML = esHoraPalindroma(hora).message
-}
-
 const esHoraPalindromaCuatroDigitos = (hora) => {
-  const respuesta = ''
-  const estado = false
+  let respuesta = ''
+  let estado = false
 
   if (hora[0] == hora[3] && hora[1] == hora[2]){
     respuesta = `Es palíndromo de cuatro dígitos: ${hora}`
@@ -38,8 +41,16 @@ const esHoraPalindromaCuatroDigitos = (hora) => {
 }
 
 const esHoraPalindromaTresDigitos = (hora) => {
-  const respuesta = ''
-  const estado = false
+  let respuesta = ''
+  let estado = false
+
+  if (hora[0] == hora[2]) {
+    respuesta = `Es palíndromo de tres dígitos: ${hora}`
+    estado = true
+  }
+
+  document.getElementById("palindromoTresDigitos").innerHTML = respuesta
+  return estado
 }
 
 const conversionADoceHoras = (hora) => {
@@ -53,9 +64,14 @@ const conversionADoceHoras = (hora) => {
 }
 
 const esPalindromo24Horas = (hora) => {
-
+  return esHoraPalindromaCuatroDigitos(hora)
 }
 
 const esPalindromo12Horas = (hora) => {
-
+  hora = conversionADoceHoras(hora)
+  if (hora.length == 4) {
+    return esHoraPalindromaCuatroDigitos(hora)
+  } else {
+    return esHoraPalindromaTresDigitos(hora)
+  }
 }
