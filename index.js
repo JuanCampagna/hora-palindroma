@@ -1,38 +1,62 @@
 const esHoraPalindroma = (hora) => {
+  console.log(diccionario)
   let horaString = hora.toString()
   horaString = horaString.replace(':','')
-  const cantidadDigitos = horaString.length
 
-  console.log(horaString)
-  if (cantidadDigitos < 3)
-    return { status: "error", message: "La cantidad de dígitos no es suficiente" }
-  else if (cantidadDigitos > 4)
-    return { status: "error", message: "La cantidad de dígitos es excesiva" }
-  else
-    switch (cantidadDigitos) {
-      case 3:
-        if (horaString[0] == horaString[2]) {
-          return { status: "ok", message: "Es palíndromo"}
-        } else {
-          return { status: "error", message: "No es palíndromo"}
-        }
-      
-      case 4:
-        if (horaString[0] == '0' && horaString[3] != '0')
-          return esHoraPalindroma(horaString.slice(1))
-        if (horaString[0] == horaString[3] && horaString[1] == horaString[2])
-          return { status: "ok", message: "Es palíndromo"}
-        else if (horaString[0] == horaString[2] && horaString[1] == horaString[3])
-          return { status: "ok", message: "No es palíndromo pero cuenta igual"}
-        else
-          return { status: "error", message: "No es palíndromo"}
-    
-      default:
-        return { status: "error", message: "Ocurrió un error inesperado"}
-    }
+  document.getElementById("respuesta").innerHTML = ""
+  document.getElementById("palindromoCuatroDigitos").innerHTML = ""
+  document.getElementById("palindromoTresDigitos").innerHTML = ""
+
+  if (esPalindromo24Horas(horaString) || esPalindromo12Horas(horaString)) {
+    document.getElementById("respuesta").innerHTML = "Es palíndromo"
+  } else {
+    document.getElementById("respuesta").innerHTML = "No es palíndromo"
+  }
 }
 
 const imprime = () => {
   const hora = document.getElementById("inputHora").value
-  document.getElementById("respuesta").innerHTML = esHoraPalindroma(hora).message
+  // console.log(esHoraPalindroma(hora))
+  esHoraPalindroma(hora)
+  // document.getElementById("respuesta").innerHTML = esHoraPalindroma(hora).message
+}
+
+const esHoraPalindromaCuatroDigitos = (hora) => {
+  const respuesta = ''
+  const estado = false
+
+  if (hora[0] == hora[3] && hora[1] == hora[2]){
+    respuesta = `Es palíndromo de cuatro dígitos: ${hora}`
+    estado = true
+  }
+  else if (hora[0] == hora[2] && hora[1] == hora[3]) {
+    respuesta = `No es palíndromo de cuatro dígitos, pero cuenta igual: ${hora}`
+    estado = true
+  }
+
+  document.getElementById("palindromoCuatroDigitos").innerHTML = respuesta
+  return estado
+}
+
+const esHoraPalindromaTresDigitos = (hora) => {
+  const respuesta = ''
+  const estado = false
+}
+
+const conversionADoceHoras = (hora) => {
+  const horas = parseInt(hora.substring(0,2))
+  if (horas >= 12) {
+    return (horas-12).toString()+hora.substring(2,4)
+  } else {
+    return horas.toString()+hora.substring(2,4)
+  }
+  //si las horas es menor a 10, termina devolviendo 3 dígitos
+}
+
+const esPalindromo24Horas = (hora) => {
+
+}
+
+const esPalindromo12Horas = (hora) => {
+
 }

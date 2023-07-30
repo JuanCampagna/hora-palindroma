@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="index.js"></script>
+  <script src="index.js" type="module"></script>
 </head>
 <body>
   <h1>¿Es hora capicúa?</h1>
-  <input type="time" step="3600000" id="inputHora"/>
+  <!-- <input type="time" step="3600000" id="inputHora"/> -->
+  <input type="text" id="inputHora"/>
   <button onclick="imprime()">Submit</button>
   <h2 id="respuesta"></h2>
+  <br>
+  <h2 id="palindromoCuatroDigitos"></h2>
+  <br>
+  <h2 id="palindromoTresDigitos"></h2>
 </body>
 </html>
