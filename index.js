@@ -1,5 +1,4 @@
 const esHoraPalindroma = (hora) => {
-  console.log(diccionario)
   let horaString = hora.toString()
   horaString = horaString.replace(':','')
 
