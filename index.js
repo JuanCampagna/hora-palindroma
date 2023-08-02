@@ -5,6 +5,10 @@ const esHoraPalindroma = () => {
   document.getElementById("respuesta").innerHTML = ""
   document.getElementById("palindromoCuatroDigitos").innerHTML = ""
   document.getElementById("palindromoTresDigitos").innerHTML = ""
+  const body = document.querySelector('body');
+  body.classList.remove('confetti');
+  // const horaPerfecta = document.getElementById("hora-perfecta");
+  // horaPerfecta.classList.remove("hora-perfecta")
 
   if (isNaN(hora) || hora=="") { 
     document.getElementById("respuesta").innerHTML = "El valor ingresado no es numérico"
@@ -15,7 +19,8 @@ const esHoraPalindroma = () => {
   const palindromo12Horas = esPalindromo12Horas(hora)
   if (palindromo24horas || palindromo12Horas) {
     if (palindromo24horas && palindromo12Horas) {
-      // Insertar gif de festejo con un texto
+      body.classList.add('confetti');
+      // horaPerfecta.classList.add('hora-perfecta');
     }
     document.getElementById("respuesta").innerHTML = "Es palíndromo"
   } else {

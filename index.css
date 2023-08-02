@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+body.confetti {
+  background-image: url('confetti-10.gif');
+}
+
+#horaPerfecta.hora-perfecta {
+  display: block;
+}
